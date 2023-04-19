@@ -185,6 +185,10 @@ impl Fs {
     }
 
     pub async fn add(&mut self, dir: String, content: String) -> Result<()> {
+        self.write(dir, content.into_bytes()).await
+    }
+
+    pub async fn write(&mut self, dir: String, content: Vec<u8>) -> Result<()> {
         let path = PathSegments::from_path(dir)?;
 
         match path {
